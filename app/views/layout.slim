@@ -1,0 +1,17 @@
+doctype html
+
+html ng-app='sky'
+  head
+    title Sky
+
+    
+    == js_tag('lib/sea.js')
+    == js_tag('sky/config.js')
+
+
+    == js_tag("angular-1.0.7/angular.js")
+    == js_tag("sky/sky.js")
+
+    == css_tag("bootstrap/css/bootstrap.css")
+  body
+    div ng-view=''

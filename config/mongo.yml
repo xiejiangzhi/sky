@@ -1,0 +1,11 @@
+
+development:
+  host: localhost
+
+
+production:
+  host: localhost
+
+test:
+  host: localhost
+
