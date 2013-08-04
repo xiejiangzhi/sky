@@ -1,0 +1,24 @@
+
+development:
+  sessions:
+    default:
+      database: sky_dev
+      hosts:
+        - localhost:27017
+
+production:
+  sessions:
+    default:
+      database: sky_prod
+      hosts:
+        - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: sky_test
+      hosts:
+        - localhost:27017
+
+
+

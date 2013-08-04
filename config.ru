@@ -4,8 +4,8 @@ require File.expand_path('../config/application', __FILE__)
 use Rack::Static, :urls => ['/public']
 
 
-map '/blog' do
-  run Sky::Blog
+map '/posts' do
+  run Sky::Post
 end
 
 

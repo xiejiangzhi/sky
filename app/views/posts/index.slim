@@ -1,24 +1,29 @@
 
+a href='#/' class='btn' Back
+a href='javascript: void(0)' class='btn' ng-click='new()' New
+
+form  ng-show='config.new_view'
+  div ng-include='templates.form'
+  a href='javascript: void(0)' class='btn' ng-click='create(post)' Create
+
+
 div ng-repeat='post in posts' ng-switch='post.view_status'
   div ng-switch-default='view'
     h3 = '{{post.title}}'
+    p = '{{post.created_at}}'
     p = '{{post.content}}'
 
     p
       a href='javascript: void(0)' class='btn' ng-click='edit(post)' Edit
 
+    br
+    hr
+
   form ng-switch-when='edit'
-    p 
-      = "title: "
-      input type='text' ng-model='post._title'
-    p
-      = 'content: '
-      input type='text' ng-model='post._content'
+    div ng-include='templates.form'
 
     p
       a href='javascript: void(0)' class='btn' ng-click='reset(post)' Cancel
       a href='javascript: void(0)' class='btn' ng-click='update(post)' Save
 
 
-
-a href='#/' Back

@@ -8,7 +8,7 @@ gem 'sinatra'
 
 gem 'bson'
 gem 'bson_ext'
-gem 'mongo'
+gem 'mongoid'
 gem 'json'
 
 

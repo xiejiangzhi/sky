@@ -2,6 +2,8 @@
 // routes
 
 (function(global){
+  seajs.require('jquery');
+
   var Sky = angular.module('sky', []);
 
   Sky.config(function($routeProvider){
@@ -11,12 +13,8 @@
         templateUrl: '/template/index'
       })
       .when('/blog', {
-        controller: remote_controller('blog/posts/index'),
-        templateUrl: '/template/blog/posts/index'
-      })
-      .when('/blog/posts/edit/:id', {
-        controller: remote_controller('blog/posts/edit'),
-        templateUrl: '/template/blog/posts/edit'
+        controller: remote_controller('posts'),
+        templateUrl: '/template/posts/index'
       })
       .otherwise({redirectTo:'/'});
   });
