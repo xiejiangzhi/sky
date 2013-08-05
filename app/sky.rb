@@ -26,6 +26,20 @@ module Sky; class App < Sinatra::Base
 
 
 
+  get '/stylesheets/*.css' do
+    p = params['splat'].first
+    t = File.expand_path("public/sky/css/#{p}.less", SKY_PATH)
+
+    if File.exist?(t)
+      less File.read(t), :layout => false
+    else
+      erb "no found stylesheets: '#{p}'"
+    end
+  end
+
+
+
+
 
   helpers do
     def js_tag(path)
@@ -35,6 +49,11 @@ module Sky; class App < Sinatra::Base
 
     def css_tag(path)
       "<link href='/public/#{path}' rel='stylesheet'>"
+    end
+
+
+    def less_tag(path)
+      "<link href='/stylesheets/#{path}' rel='stylesheet'>"
     end
   end
 

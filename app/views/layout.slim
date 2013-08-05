@@ -6,12 +6,13 @@ html ng-app='sky'
 
     
     == js_tag('lib/sea.js')
-    == js_tag('sky/config.js')
+    == js_tag('sky/js/config.js')
 
-
-    == js_tag("angular-1.0.7/angular.js")
-    == js_tag("sky/sky.js")
+    javascript:
+      seajs.use('sky');
 
     == css_tag("bootstrap/css/bootstrap.css")
-  body
-    div ng-view=''
+    == less_tag("sky.css")
+  body class='sky'
+    div ng-include='' src='"/template/components/alert"' ng-show='error' ng-controller='AlertCtrl'
+    div ng-view='' class='sky_view'

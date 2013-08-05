@@ -1,11 +1,13 @@
 
 define(function(require, exports){
+  var alert = require('alert');
+
   exports.ctrl = function($scope, $http, $location){
 
     $http.get('/posts').success(function(posts){
       $scope.posts = posts;
     }).error(function(data){
-
+      alert.error('posts request error!', data);
     });
 
 
@@ -44,7 +46,7 @@ define(function(require, exports){
         
         $scope.config.new_view = false;
 
-        $scope.posts.push(data.post);
+        $scope.posts.items.push(data.post);
       }).error(function(err){
         post._error = err;
       });
