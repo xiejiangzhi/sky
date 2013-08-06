@@ -27,7 +27,7 @@ define(function(require, exports){
 
 
 
-  exports.ctrl = function($scope){
+  exports.ctrl = function($scope, $window){
     store.$scope = $scope;
 
     $scope.error = null

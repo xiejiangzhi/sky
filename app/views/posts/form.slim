@@ -1,7 +1,9 @@
-p 
-  = "title: "
-  input type='text' ng-model='post._title'
-p
-  = 'content: '
-  input type='text' ng-model='post._content'
+
+div class='form-group'
+  label for='post_title' Ttile
+  input type='text' class='form-control' id='post_title' placeholder='Title' ng-model='post._title'
+
+div class='form-group'
+  label for='post_content' Content
+  textarea type='text' class='form-control' row='3' id='post_content' placeholder='Content' ng-model='post._content'
   

@@ -2,30 +2,39 @@
 div class='posts_ctrl'
   div class='menu'
     a href='#/' class='btn' Back
-    a href='javascript: void(0)' class='btn' ng-click='new()' New
+    button class='btn' ng-click='new()' New
 
     form  ng-show='config.new_view'
-      div ng-include='templates.form'
-      a href='javascript: void(0)' class='btn' ng-click='create(post)' Create
+      fieldset
+        legend Post
+        div ng-include='"/template/posts/form"'
+
+      button type='submit' class='btn btn-default' ng-click='create(post)' Submit
 
   hr
 
-  div ng-repeat='post in posts.items' ng-switch='post.view_status' class='posts'
-    div ng-switch-default='view' class='post_box'
-      h3 = '{{post.title}}'
-      p = '{{post.created_at}}'
-      p = '{{post.content}}'
+  div
+    strong CurrentPage: {{ posts.current_page }}
+    button class='btn' ng-click='prepage()' PrePage
+    button class='btn' ng-click='nextpage()' NextPage
 
-      p
-        a href='javascript: void(0)' class='btn' ng-click='edit(post)' Edit
+  div ng-repeat='post in posts.items' class='posts'
+    div class='post_box' ng-switch='post.view_status'
+      div ng-switch-default='view' class='show'
+        p = '{{ post.created_at | date:"yyyy-MM-dd HH:mm:ss" }}'
+        h3 class="text-center" = '{{ post.title }}'
+        p ng-bind-html-unsafe="post.content"
+
+        p
+          button class='btn' ng-click='edit(post)' Edit
+
+      form ng-switch-when='edit' class='edit'
+        div ng-include='"/template/posts/form"'
+
+        p
+          button class='btn' ng-click='reset(post)' Cancel
+          button class='btn' ng-click='update(post)' Save
 
       hr
-
-    form ng-switch-when='edit' class='post_edit'
-      div ng-include='templates.form'
-
-      p
-        a href='javascript: void(0)' class='btn' ng-click='reset(post)' Cancel
-        a href='javascript: void(0)' class='btn' ng-click='update(post)' Save
 
 
