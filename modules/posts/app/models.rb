@@ -9,4 +9,6 @@ module Models; class Post
   field :title,   :type => String
   field :content, :type => String
 
+  default_scope order_by(:created_at => -1)
+
 end; end

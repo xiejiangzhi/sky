@@ -27,6 +27,9 @@
       'components.alert': 'bootstrap/alert.js',
       
 
+      'waterfall_stream': 'components/waterfall_stream',
+      
+
 
       'home': 'sky_ctrl/home.js',
       'posts': 'sky_ctrl/posts.js',

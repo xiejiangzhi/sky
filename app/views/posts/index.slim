@@ -14,19 +14,19 @@ div class='posts_ctrl'
   hr
 
   div
-    strong CurrentPage: {{ posts.current_page }}
-    button class='btn' ng-click='prepage()' PrePage
-    button class='btn' ng-click='nextpage()' NextPage
-
-  div ng-repeat='post in posts.items' class='posts'
+  div ng-repeat='post in posts' class='posts'
     div class='post_box' ng-switch='post.view_status'
+      div class='datetime'
+        strong class='year' ng-show='show_year(post)' = '{{ post.created_at | date:"yyyy-MM" }}'
+        strong class='date' = '{{ post.created_at | date:"dd HH:mm" }}'
+
       div ng-switch-default='view' class='show'
-        p = '{{ post.created_at | date:"yyyy-MM-dd HH:mm:ss" }}'
+        
         h3 class="text-center" = '{{ post.title }}'
         p ng-bind-html-unsafe="post.content"
 
         p
-          button class='btn' ng-click='edit(post)' Edit
+          button class='btn edit' ng-click='edit(post)' Edit
 
       form ng-switch-when='edit' class='edit'
         div ng-include='"/template/posts/form"'

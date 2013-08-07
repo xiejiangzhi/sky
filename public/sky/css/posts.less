@@ -1,6 +1,7 @@
 
 .posts_ctrl {
   margin-top: 30px;
+  border-right: 4px solid #ccc;
 
   .menu {
     margin: 0px 20px;
@@ -8,5 +9,26 @@
 
   .post_box {
     height: 350px;
+    position: relative;
+
+    .datetime {
+      position: absolute;
+      right: 10px;
+
+      .year {
+        font-size: 25px;
+        color: #999;
+        width: 100px;
+        position: absolute;
+        top: -40px;
+        right: -55px;
+      }
+
+      .date {
+        width: 100px;
+        position: absolute;
+        right: -80px;
+      }
+    }
   }
 }
