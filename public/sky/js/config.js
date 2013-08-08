@@ -21,6 +21,7 @@
 
 
       'jquery': 'lib/jquery-2.0.3.js',
+      'markdown': 'lib/markdown.js',
 
 
 

@@ -2,6 +2,8 @@
 define(function(require, exports){
   var alert = require('alert');
   var waterfall_stream = require('waterfall_stream');
+  require('markdown');
+  var markdown = window.markdown;
 
   exports.ctrl = function($scope, $http, $location, $anchorScroll){
 
@@ -69,6 +71,11 @@ define(function(require, exports){
       }).error(function(err){
         post._error = err;
       });
+    }
+
+
+    $scope.previewHTML = function(md_str){
+      return markdown.toHTML(md_str || "");
     }
 
 
