@@ -39,7 +39,8 @@ module Sky; class Post < Sinatra::Base
 
     post.update_attributes({
       :title => params[:title],
-      :content => params[:content]
+      :content => params[:content],
+      :language => params[:language]
     })
 
     render_ok

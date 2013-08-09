@@ -22,13 +22,13 @@ div class='posts_ctrl'
 
       div ng-switch-default='view' class='show'
         h3 class="text-center" = '{{ post.title }}'
-        p ng-bind-html-unsafe="previewHTML(post.content)"
+        p ng-bind-html-unsafe="previewHTML(post)"
 
         p
           button class='btn edit' ng-click='edit(post)' Edit
 
       form ng-switch-when='edit' class='edit'
-        div ng-include='"/template/posts/edit_status_radio"'
+        div ng-include='"/template/posts/language_selector"'
         div ng-include='"/template/posts/form"'
 
         p
@@ -36,10 +36,10 @@ div class='posts_ctrl'
           button class='btn' ng-click='update(post)' Save
 
       div ng-switch-when='preview' class='show'
-        div ng-include='"/template/posts/edit_status_radio"'
+        div ng-include='"/template/posts/language_selector"'
 
         h3 class="text-center" = '{{ post._title }}'
-        p ng-bind-html-unsafe="previewHTML(post._content)"
+        p ng-bind-html-unsafe="previewHTML(post)"
 
         p
           button class='btn edit' ng-click='edit(post)' Return

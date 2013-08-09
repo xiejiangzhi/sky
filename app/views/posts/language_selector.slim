@@ -1,0 +1,23 @@
+
+label class='radio inline'
+  input type='radio' value='markdown' ng-model='post.language' ng-change='post.language'
+  = "Markdown"
+
+label class='radio inline'
+  input type='radio' value='html' ng-model='post.language' ng-change='post.language'
+  = "HTML"
+
+label class='radio inline'
+  input type='radio' value='text' ng-model='post.language' ng-change='post.language'
+  = "Text"
+
+
+|
+
+label class='radio inline'
+  input type='radio' value='edit' ng-model='post.view_status'
+  = "Edit"
+
+label class='radio inline'
+  input type='radio' value='preview' ng-model='post.view_status'
+  = "Preview"

@@ -24,12 +24,13 @@ define(function(require, exports){
     };
 
 
+
     
     $scope.edit = function(post){
-      post.view_status = 'edit';
+      var origin = $.extend({}, post);
 
-      post._title = post.title;
-      post._content = post.content;
+      post.view_status = 'edit';
+      post._origin = origin;
     }
 
 
@@ -45,15 +46,16 @@ define(function(require, exports){
 
     $scope.create = function(post){
       $http.post('/posts/create', {
-          title: post._title,
-          content: post._content
+          title: post.title,
+          content: post.content,
+          language: post.language
       }).success(function(data){
         
         $scope.config.new_view = false;
 
         $scope.posts.items.unshift(data.post);
       }).error(function(err){
-        post._error = err;
+        post.error = err;
       });
     }
 
@@ -61,12 +63,10 @@ define(function(require, exports){
     $scope.update = function(post){
       $http.post('/posts/update', {
           id: post._id,
-          title: post._title,
-          content: post._content
+          title: post.title,
+          content: post.content,
+          language: post.language
       }).success(function(){
-        post.title = post._title;
-        post.content = post._content;
-
         post.view_status = null;
       }).error(function(err){
         post._error = err;
@@ -74,13 +74,27 @@ define(function(require, exports){
     }
 
 
-    $scope.previewHTML = function(md_str){
-      return markdown.toHTML(md_str || "");
+    $scope.previewHTML = function(post){
+      switch (post.language) {
+      case 'markdown':
+        return markdown.toHTML(post.content || "");
+      case 'html':
+        return post.content;
+      case 'text':
+        return $("<div />").text(post.content).html();
+      default:
+        return post.content;
+      }
     }
 
 
     $scope.reset = function(post){
       post.view_status = null;
+
+      if (post,_origin) {
+        $.extend(post, post._origin);
+        delete post._origin;
+      }
     }
 
 
