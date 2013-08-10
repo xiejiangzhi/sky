@@ -9,6 +9,11 @@ map '/posts' do
 end
 
 
+map '/users' do
+  run Sky::User
+end
+
+
 map '/' do
   run Sky::App
 end

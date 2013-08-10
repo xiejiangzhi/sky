@@ -39,7 +39,9 @@ define(function(require, exports){
 
       $scope.post = {
         title: '',
-        content: ''
+        content: '',
+        language: 'markdown',
+        view_status: 'edit'
       }
     }
 
@@ -74,16 +76,27 @@ define(function(require, exports){
     }
 
 
-    $scope.previewHTML = function(post){
+    $scope.previewHTML = function(post, limit){
+      html = '';
+
       switch (post.language) {
       case 'markdown':
-        return markdown.toHTML(post.content || "");
+        html = markdown.toHTML(post.content || "");
+        break;
       case 'html':
-        return post.content;
+        html = post.content;
+        break;
       case 'text':
-        return $("<div />").text(post.content).html();
+        html = $("<div />").text(post.content).html();
+        break;
       default:
-        return post.content;
+        html = post.content;
+      }
+
+      if (limit){
+        return html.slice(0, limit);
+      } else {
+        return html;
       }
     }
 

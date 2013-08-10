@@ -1,5 +1,7 @@
 
 module Sky; class App < Sinatra::Base
+  use Rack::Session::Dalli
+  
   set :views, File.expand_path('app/views', SKY_PATH)
 
 

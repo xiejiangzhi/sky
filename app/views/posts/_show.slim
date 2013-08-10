@@ -1,0 +1,12 @@
+
+div class='datetime'
+  strong class='year' ng-show='show_year(post)' = '{{ post.created_at | date:"yyyy-MM" }}'
+  strong class='date' = '{{ post.created_at | date:"MM-dd HH:mm" }}'
+
+div ng-switch-default='view' class='show'
+  h3 class="text-center" = '{{ post.title }}'
+  p ng-bind-html-unsafe="previewHTML(post, 600)"
+
+  - if session[:admin]
+    p
+      button class='btn edit' ng-click='edit(post)' Edit

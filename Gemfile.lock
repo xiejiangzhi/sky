@@ -13,6 +13,7 @@ GEM
     builder (3.0.4)
     coderay (1.0.9)
     commonjs (0.2.6)
+    dalli (2.6.4)
     i18n (0.6.1)
     json (1.8.0)
     less (2.3.2)
@@ -56,6 +57,7 @@ PLATFORMS
 DEPENDENCIES
   bson
   bson_ext
+  dalli
   json
   less
   mongoid

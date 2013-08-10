@@ -1,9 +1,19 @@
 
 module Sky; class Post < Sinatra::Base
+  use Rack::Session::Dalli
+  
   before do
     return if params.length > 0
 
     params.merge!(JSON(env['rack.input'].read)) rescue nil
+  end
+
+
+  ADMIN_ACTION = %w{create update}
+  before do
+    if ADMIN_ACTION.include?(request.path.split('/').last)
+      halt render_err unless session[:admin]
+    end
   end
 
 
