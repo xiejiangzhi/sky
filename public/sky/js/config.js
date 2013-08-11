@@ -10,6 +10,8 @@
 
       'bootstrap': '/public/bootstrap/js',
 
+      'prettify': '/public/google-code-prettify',
+
       'lib': '/public/lib'
     },
 

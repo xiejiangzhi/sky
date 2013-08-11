@@ -2,8 +2,14 @@
 define(function(require, exports){
   var alert = require('alert');
   var waterfall_stream = require('waterfall_stream');
+  
   require('markdown');
   var markdown = window.markdown;
+
+  // require('prettify_css');
+  require('prettify');
+
+
 
   exports.ctrl = function($scope, $http, $location, $anchorScroll){
 
