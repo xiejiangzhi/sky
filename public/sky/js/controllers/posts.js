@@ -2,13 +2,10 @@
 define(function(require, exports){
   var alert = require('alert');
   var waterfall_stream = require('waterfall_stream');
+  var conversion = require("preview_html");
   
   require('markdown');
   var markdown = window.markdown;
-
-  // require('prettify_css');
-  require('prettify');
-
 
 
   exports.ctrl = function($scope, $http, $location, $anchorScroll){
@@ -82,30 +79,7 @@ define(function(require, exports){
     }
 
 
-    $scope.previewHTML = function(post, limit){
-      html = '';
-
-      switch (post.language) {
-      case 'markdown':
-        html = markdown.toHTML(post.content || "");
-        break;
-      case 'html':
-        html = post.content;
-        break;
-      case 'text':
-        html = $("<div />").text(post.content).html();
-        break;
-      default:
-        html = post.content;
-      }
-
-      if (limit){
-        return html.slice(0, limit);
-      } else {
-        return html;
-      }
-    }
-
+    $scope.previewHTML = conversion.to_html;
 
     $scope.reset = function(post){
       post.view_status = null;

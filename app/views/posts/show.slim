@@ -1,0 +1,5 @@
+
+div class='show post_box'
+  h3 class="text-center" = '{{ post.title }}'
+
+  div class='post_content' ng-bind-html-unsafe="to_html(post)"

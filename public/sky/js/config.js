@@ -10,8 +10,6 @@
 
       'bootstrap': '/public/bootstrap/js',
 
-      'prettify': '/public/google-code-prettify',
-
       'lib': '/public/lib'
     },
 
@@ -28,6 +26,7 @@
 
 
       'components.alert': 'bootstrap/alert.js',
+      'preview_html': 'components/preview_html.js',
       
 
       'waterfall_stream': 'components/waterfall_stream',
@@ -36,6 +35,7 @@
 
       'home': 'sky_ctrl/home.js',
       'posts': 'sky_ctrl/posts.js',
+      'post_show': 'sky_ctrl/post_show.js',
       
 
       'alert': 'components/alert.js'

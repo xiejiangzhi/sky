@@ -24,6 +24,10 @@ define(function(require){
         controller: sa.autoload('posts', 'posts.css'),
         templateUrl: '/template/posts/index'
       })
+      .when('/blog/:id', {
+        controller: sa.autoload('post_show', 'post_show.css'),
+        templateUrl: '/template/posts/show'
+      })
       .otherwise({redirectTo:'/'});
   });
 

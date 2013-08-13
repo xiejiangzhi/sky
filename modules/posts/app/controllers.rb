@@ -29,7 +29,7 @@ module Sky; class Post < Sinatra::Base
   get '/show' do
     post = Models::Post.find(params[:id])
 
-    render_ok post
+    render_ok post.attributes
   end
 
 

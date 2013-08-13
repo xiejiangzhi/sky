@@ -33,7 +33,7 @@ div class='posts_ctrl'
           div ng-include='"/template/posts/language_selector"'
 
           h3 class="text-center" = '{{ post._title }}'
-          p ng-bind-html-unsafe="previewHTML(post)"
+          div class='post_content' ng-bind-html-unsafe="previewHTML(post)"
 
       - else
         == slim :'posts/_show'
