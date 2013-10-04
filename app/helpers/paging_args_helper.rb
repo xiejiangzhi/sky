@@ -4,7 +4,8 @@ module PagingArgsHelper
     perpage = params[:perpage].to_i
     perpage = 10 if perpage == 0
 
-    page = params[:page].to_i || 1
+    page = params[:page].to_i
+    page = 1 if page == 0
 
     args = {
       :page => page,

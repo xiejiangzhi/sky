@@ -4,13 +4,13 @@ require File.expand_path('../../config/environment.rb', __FILE__)
 
 module Sky; class App < Sinatra::Base
   use Rack::Session::Dalli
-  set :views, File.expand_path('app/views', SKY_PATH)
+
+  set :views, './app/views'
 
 
   helpers SessionHelper
   helpers PagingArgsHelper
   helpers RenderHelper
-
 
 
 

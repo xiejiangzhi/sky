@@ -3,7 +3,6 @@ require File.expand_path('../app/sky', __FILE__)
 
 use Rack::Static, :urls => ['/public']
 
-# run Sky::App
 
 controller_dir = File.expand_path('app/controllers', SKY_PATH)
 Sky::AutoloadDir.each_dir(controller_dir) do |basename, dir_path|

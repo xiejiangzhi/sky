@@ -9,6 +9,17 @@ class PostsController < Sky::App
   
 
 
+  # all posts
+  # 
+  # Params:
+  #   page:
+  #   perpage:
+  # Return:
+  #   ok:
+  #   items:
+  #   count_page:
+  #   current_page:
+  #   perpage:
   get '/' do
     page = paging_args
 
@@ -18,14 +29,31 @@ class PostsController < Sky::App
   end
 
 
-  get '/show' do
+
+  # Params:
+  #   id:
+  # Return:
+  #   id:
+  #   title:
+  #   content:
+  #   created_at:
+  #   updated_at:
+  get '/show' do; begin
     post = Post.find(params[:id])
 
     render_ok post.attributes
-  end
+  rescue => e
+    render_err e
+  end; end
 
 
 
+  # Params:
+  #   title:
+  #   content:
+  # Return:
+  #   ok: true of false
+  #   post: if true
   post '/create' do
     post = Post.create!({
       :title => params[:title],
@@ -36,6 +64,13 @@ class PostsController < Sky::App
   end
 
 
+
+  # Params:
+  #   id:
+  #   title:
+  #   content:
+  # Return:
+  #   ok: true or false
   post '/update' do
     post = Post.find(params[:id])
 

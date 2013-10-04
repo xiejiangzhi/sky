@@ -7,14 +7,12 @@ module RenderHelper
   end
 
 
-  def render_err(err, desc)
+  def render_err(e)
+    puts e.to_hash
+    
     status 400
 
-    {
-      :error => err,
-      :error_desc => desc,
-      :ok => false
-    }.to_json
+    e.to_hash.merge(:ok => false).to_json
   end
 
 

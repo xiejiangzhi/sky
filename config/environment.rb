@@ -14,11 +14,20 @@ require 'rack/session/dalli'
 
 
 SKY_PATH = File.expand_path('../../', __FILE__)
+Dir.chdir(SKY_PATH)
 
 
 
 
-Mongoid.load!(File.expand_path('config/mongoid.yml', SKY_PATH))
 
-require File.expand_path('lib/sky/autoload_dir', SKY_PATH)
-require File.expand_path('config/autoload', SKY_PATH)
+Mongoid.load!('config/mongoid.yml')
+
+
+require './config/environment/env'
+require './lib/sky/autoload_dir'
+require './config/autoload'
+
+
+
+
+require './lib/sky/error'

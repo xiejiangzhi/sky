@@ -36,6 +36,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
     ref (1.0.5)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -72,6 +74,7 @@ DEPENDENCIES
   less
   mongoid
   pry
+  rack-test
   rspec
   sinatra
   slim
