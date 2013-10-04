@@ -1,19 +1,16 @@
 
-require File.expand_path('../config/application', __FILE__)
+require File.expand_path('../app/sky', __FILE__)
 
 use Rack::Static, :urls => ['/public']
 
+# run Sky::App
 
-map '/posts' do
-  run Sky::Post
-end
+controller_dir = File.expand_path('app/controllers', SKY_PATH)
+Sky::AutoloadDir.each_dir(controller_dir) do |basename, dir_path|
+  ctrl_name = (dir_path + basename.gsub('.rb', '')).camelcase
+  ctrl = ctrl_name.constantize
 
-
-map '/users' do
-  run Sky::User
-end
-
-
-map '/' do
-  run Sky::App
+  map ctrl.rackup_root do
+    run ctrl
+  end
 end

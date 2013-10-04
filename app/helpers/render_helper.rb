@@ -1,5 +1,5 @@
 
-module Helpers; module RenderHelper
+module RenderHelper
   def render_ok(data = {})
     data.merge!({
       :ok => true
@@ -7,12 +7,14 @@ module Helpers; module RenderHelper
   end
 
 
-  def render_err(data = {})
+  def render_err(err, desc)
     status 400
 
-    data.merge({
+    {
+      :error => err,
+      :error_desc => desc,
       :ok => false
-    }).to_json
+    }.to_json
   end
 
 
@@ -26,4 +28,4 @@ module Helpers; module RenderHelper
       :perpage => paging_args[:perpage]
     }.to_json
   end
-end; end
+end

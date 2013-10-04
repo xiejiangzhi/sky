@@ -15,6 +15,7 @@ gem 'json'
 
 
 
+gem 'activesupport'
 gem 'therubyracer'
 gem 'slim'
 gem 'less'
@@ -27,4 +28,5 @@ gem 'less'
 
 group :development, :test do
   gem 'pry'
+  gem 'rspec'
 end

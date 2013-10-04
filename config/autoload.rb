@@ -2,7 +2,10 @@
 autoload :YAML, 'yaml'
 
 
-module Helpers
-  autoload :PagingArgs, File.expand_path('lib/helpers/paging_args', SKY_PATH)
-  autoload :RenderHelper, File.expand_path('lib/helpers/render_helper', SKY_PATH)
-end
+autoload_dir File.expand_path('lib', SKY_PATH)
+
+autoload_dir(File.expand_path('app/controllers', SKY_PATH))
+autoload_dir(File.expand_path('app/models', SKY_PATH))
+autoload_dir(File.expand_path('app/helpers', SKY_PATH))
+
+

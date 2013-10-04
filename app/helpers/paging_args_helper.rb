@@ -1,5 +1,5 @@
 
-module Helpers; module PagingArgs
+module PagingArgsHelper
   def paging_args
     perpage = params[:perpage].to_i
     perpage = 10 if perpage == 0
@@ -15,4 +15,4 @@ module Helpers; module PagingArgs
 
     args
   end
-end; end
+end

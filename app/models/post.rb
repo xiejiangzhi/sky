@@ -1,7 +1,7 @@
 
 
 
-module Models; class Post
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -18,4 +18,4 @@ module Models; class Post
 
   default_scope order_by(:created_at => -1)
 
-end; end
+end

@@ -9,6 +9,6 @@ div ng-switch-default='' class='show'
 
   div class='post_content' ng-bind-html-unsafe="previewHTML(post, 'split')"
 
-  - if session[:admin]
+  - if current_user.can? :edit, Post
     p
       button class='btn edit' ng-click='edit(post)' Edit

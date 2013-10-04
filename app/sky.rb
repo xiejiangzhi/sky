@@ -1,62 +1,36 @@
 
+require File.expand_path('../../config/environment.rb', __FILE__)
+
+
 module Sky; class App < Sinatra::Base
   use Rack::Session::Dalli
-  
   set :views, File.expand_path('app/views', SKY_PATH)
 
 
+  helpers SessionHelper
+  helpers PagingArgsHelper
+  helpers RenderHelper
 
-  get '/' do
-    slim :index
+
+
+
+  before do
+    return if params.length > 0
+
+    params.merge!(JSON(env['rack.input'].read)) rescue nil
   end
 
 
+  
+  class << self
+    def rackup_root
+      @rackup_root ||= '/' + self.name.underscore.gsub(/_controller$/, '')
+    end
 
 
-  # TODO: cache
-  get '/template/*' do
-    p = params['splat'].first
-    t = File.expand_path(p + '.slim', settings.views)
-
-    if File.exist?(t)
-      slim File.read(t), :layout => false
-    else
-      erb "no found template: '#{p}'"
+    def set_rackup_root(path)
+      @rackup_root = path
     end
   end
-
-
-
-
-  get '/stylesheets/*.css' do
-    p = params['splat'].first
-    t = File.expand_path("public/sky/css/#{p}.less", SKY_PATH)
-
-    if File.exist?(t)
-      less File.read(t), :layout => false
-    else
-      erb "no found stylesheets: '#{p}'"
-    end
-  end
-
-
-
-
-
-  helpers do
-    def js_tag(path)
-      "<script type='text/javascript' src='/public/#{path}'></script>"
-    end
-
-
-    def css_tag(path)
-      "<link href='/public/#{path}' rel='stylesheet'>"
-    end
-
-
-    def less_tag(path)
-      "<link href='/stylesheets/#{path}' rel='stylesheet'>"
-    end
-  end
-
+  
 end; end
