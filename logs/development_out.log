@@ -23,3 +23,13 @@
 {:error=>"running_error", :error_desc=>"\nProblem:\n  Calling Document.find with nil is invalid.\nSummary:\n  Document.find expects the parameters to be 1 or more ids, and will return a single document if 1 id is provided, otherwise an array of documents if multiple ids are provided.\nResolution:\n  Most likely this is caused by passing parameters directly through to the find, and the parameter either is not present or the key from which it is accessed is incorrect."}
 {:error=>"sky_error", :error_desc=>"Argument 'title' invalid, value can no be ''"}
 {:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be ''"}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be 'jkhkjh\n------\n\nasdf\n=====\n\n___asdf___\n\n```\nfunction(){\n\n}\n```'"}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be 'jkhkjh\n------\n\nasdf\n=====\n\n___asdf___\n\n```\nfunction(){\n\n}\n```'"}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be 'dfasdfasdf\n\n```\nfunction (){\n\n}\n\n```'"}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be 'dfasdfasdf\n\n```\nfunction (){\n\n}\n\n```'"}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be 'dfasdfasdf\n\n```\nfunction (){\n\n}\n\n```'"}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be 'dfasdfasdf\n\n```\nfunction (){\n\n}\n\n```'"}
+{:error=>"sky_error", :error_desc=>"Argument 'title' invalid, value can no be 'as'."}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be ''."}
+{:error=>"sky_error", :error_desc=>"Argument 'content' invalid, value can no be ''."}
+{:error=>"sky_error", :error_desc=>"Argument 'title' invalid, value can no be ''."}
