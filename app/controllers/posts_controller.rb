@@ -2,6 +2,7 @@
 class PostsController < Sky::App
 
   helpers FilterHelper
+  helpers ArgumentsValidHelper
 
   before /create|update/ do
     auth_permissio_filter
@@ -59,6 +60,8 @@ class PostsController < Sky::App
   #   ok: true of false
   #   post: if true
   post '/create' do; begin
+    args_empty_valid %w{title content}
+
     post = Post.create!({
       :title => params[:title],
       :content => params[:content],
@@ -106,6 +109,8 @@ class PostsController < Sky::App
   #   ok: true or false
   #   answer: {_id: xxx}
   post '/answer' do; begin
+    args_empty_valid %w{content}
+
     post = Post.find(params[:target_id])
 
     answer = post.posts.create({

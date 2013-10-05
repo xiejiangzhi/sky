@@ -52,7 +52,7 @@ module Sky
     def initialize
       @error_type = NO_PERMISSION_ERROR
 
-      super 'Username Password does not match'
+      super 'Username Password does not match.'
     end
   end
 
@@ -62,7 +62,14 @@ module Sky
     def initialize
       @error_type = AUTH_ERROR
 
-      super 'User does not have permission to operate'
+      super 'User does not have permission to operate.'
+    end
+  end
+
+
+  class ArgumentError < SkyError
+    def initialize(name, val)
+      super "Argument '#{name}' invalid, value can no be '#{val}'."
     end
   end
 

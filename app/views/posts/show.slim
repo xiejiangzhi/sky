@@ -7,3 +7,16 @@ div class='show post_box'
 
   - if current_user.can?(:edit, Post)
     a href='#/posts/edit/{{ post._id }}' ng-hide='view_status' Edit
+
+  hr
+
+  div class='answer'
+    form
+      textarea ng-model='answer.content' rows='3' cols='80'
+      br
+      a href='javascript: void(0)' class='btn btn-default' ng-click='create_answer()' Answer
+
+  ul class='answers' ng-repeat='answer in answers'
+    li
+      p ng-bind-html-unsafe="to_html(answer)"
+      span = '{{ answer.created_at | date:"yyyy-MM-dd HH:mm" }}'
