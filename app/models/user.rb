@@ -50,15 +50,16 @@ class User; class << self
 
   # id or unknow
   def find_user(user_id)
-    user = where(:id => user_id).first
-    return user if user
-
-    user = where(:username => 'Guest', :role => GUEST).first
-    return user if user
-
-    create(:username => 'Guest', :role => GUEST)
+    where(:id => user_id).first || guest
   end
 
+
+
+
+  def guest
+    where(:username => 'Guest', :role => GUEST).first ||
+    create(:username => 'Guest', :role => GUEST)
+  end
 
 
 

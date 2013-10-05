@@ -1,6 +1,14 @@
 
 class UsersController < Sky::App
 
+  helpers FilterHelper
+
+  before '/' do
+    auth_permissio_filter
+  end
+
+
+
   get '/' do
     users = User.all
 
@@ -29,7 +37,7 @@ class UsersController < Sky::App
 
     if user.role == User::ADMIN
       unless user.valid_pwd(params[:password])
-        user = User.find_user(nil)
+        user = User.guest
       end
     end
 

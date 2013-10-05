@@ -22,13 +22,14 @@ class SkyController < Sky::App
     if File.exist?(t)
       slim File.read(t), :layout => false
     else
-      erb "no found template: '#{p}'"
+      status 404
+      erb "not found template: '#{p}'"
     end
   end
 
 
 
-
+  # 
   get '/stylesheets/*.css' do
     p = params['splat'].first
     t = File.expand_path("public/sky/css/#{p}.less", SKY_PATH)
@@ -36,7 +37,8 @@ class SkyController < Sky::App
     if File.exist?(t)
       less File.read(t), :layout => false
     else
-      erb "no found stylesheets: '#{p}'"
+      status 404
+      erb "not found stylesheets: '#{p}'"
     end
   end
 

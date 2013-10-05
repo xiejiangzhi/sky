@@ -8,7 +8,7 @@ module RenderHelper
 
 
   def render_err(e)
-    puts e.to_hash
+    $logger.error e.to_hash
     
     status 400
 

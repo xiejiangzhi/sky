@@ -23,10 +23,11 @@ Dir.chdir(SKY_PATH)
 Mongoid.load!('config/mongoid.yml')
 
 
-require './config/environment/env'
+
 require './lib/sky/autoload_dir'
 require './config/autoload'
 
+require './config/environment/env'
 
 
 

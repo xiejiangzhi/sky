@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-SpecApp.app = PostsController
-
 describe PostsController do
   before :each do
+    SpecApp.app = PostsController
+    
     100.times {|i| Post.create!(:title => "tt#{i}", :content => "cc#{i}") }
   end
 
@@ -109,11 +109,58 @@ describe PostsController do
         error_should(last_response, Sky::NoPermissionError.new)
       }.to change(Post, :count).by(0)
     end
+
+
+    it 'by admin' do
+      user = get_user('admin', User::ADMIN)
+      req_args = {:title => 'test t', :content => 'test c'}
+
+      expect {
+        post '/create', req_args, valid_session(:user_id => user.id.to_s)
+
+        last_response.should be_ok
+      }.to change(Post, :count).by(1)
+
+      data = JSON(last_response.body)
+      data['ok'].should == true
+      data['post']['_id'].should_not == nil
+      data['post']['title'].should == 'test t'
+      data['post']['content'].should == 'test c'
+    end
   end
 
 
 
   describe 'update' do
+    before :each do
+      @post = Post.create(:title => 'test t', :content => 'test c')
+    end
 
+    it 'no permission' do
+      expect {
+        post '/update', :title => 'tt', :content => 'cc', :id => @post.id.to_s
+
+        last_response.should be_bad_request
+        error_should(last_response, Sky::NoPermissionError.new)
+      }.to change(Post, :count).by(0)
+    end
+
+
+    it 'by admin' do
+      user = get_user('admin', User::ADMIN)
+      req_args = {:title => 'tt', :content => 'cc', :id => @post.id.to_s}
+
+      expect {
+        post '/update', req_args, valid_session(:user_id => user.id.to_s)
+
+        last_response.should be_ok
+      }.to change(Post, :count).by(0)
+
+      data = JSON(last_response.body)
+      data['ok'].should == true
+      @post.reload
+      @post.title.should == req_args[:title]
+      @post.content.should == req_args[:content]
+    end
   end
 end

@@ -2,7 +2,7 @@
 module HelperMethods
   def valid_session(opts = {})
     {
-      :user_id => get_user('test').id.to_s
+      'rack.session' => opts
     }
   end
 
