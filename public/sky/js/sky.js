@@ -20,11 +20,15 @@ define(function(require){
         controller: sa.autoload('home', 'home.css'),
         templateUrl: '/template/index'
       })
-      .when('/blog', {
+      .when('/posts', {
         controller: sa.autoload('posts', 'posts.css'),
         templateUrl: '/template/posts/index'
       })
-      .when('/blog/:id', {
+      .when('/posts/edit/:id', {
+        controller: sa.autoload('post_edit', 'post_edit.css'),
+        templateUrl: '/template/posts/edit'
+      })
+      .when('/posts/:id', {
         controller: sa.autoload('post_show', 'post_show.css'),
         templateUrl: '/template/posts/show'
       })

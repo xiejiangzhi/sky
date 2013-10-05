@@ -8,6 +8,12 @@ require 'rack/test'
 require 'helper_methods'
 
 
+require 'rspec/core/shared_context'
+spec_modules_path = File.expand_path('../spec_modules/*.rb', __FILE__)
+Dir[spec_modules_path].each {|path| load path }
+
+
+
 
 RSpec.configure do |config|
   config.before do

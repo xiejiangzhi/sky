@@ -47,6 +47,7 @@ class UsersController < Sky::App
   end
 
 
+
   post '/logout' do
     session.clear
 

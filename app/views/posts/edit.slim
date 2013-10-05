@@ -1,0 +1,15 @@
+
+form
+  div == slim :'posts/_language_selector'
+
+  div ng-switch='view_status'
+
+    fieldset ng-switch-when='edit'
+      legend Post
+      div == slim :'/posts/_form'
+
+    div ng-switch-when='preview'
+      div ng-include='"/template/posts/show"'
+
+  a href='#/posts/{{ post.id }}' class='btn btn-default' Cancel
+  button type='submit' class='btn btn-default' ng-click='submit()' Submit

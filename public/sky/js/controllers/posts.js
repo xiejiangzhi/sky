@@ -8,7 +8,7 @@ define(function(require, exports){
   var markdown = window.markdown;
 
 
-  exports.ctrl = function($scope, $http, $location, $anchorScroll){
+  exports.ctrl = function($scope, $http){
 
     $scope.config = {
       new_view: false,
@@ -28,67 +28,37 @@ define(function(require, exports){
 
 
 
-    
-    $scope.edit = function(post){
-      var origin = $.extend({}, post);
-
-      post.view_status = 'edit';
-      post._origin = origin;
-    }
-
-
-    $scope.new = function(){
-      $scope.config.new_view ^= true;
-
-      $scope.post = {
-        title: '',
-        content: '',
-        language: 'markdown',
-        view_status: 'edit'
-      }
-    }
-
-
-    $scope.create = function(post){
-      $http.post('/posts/create', {
-          title: post.title,
-          content: post.content,
-          language: post.language
-      }).success(function(data){
+    // $scope.create = function(post){
+    //   $http.post('/posts/create', {
+    //       title: post.title,
+    //       content: post.content,
+    //       language: post.language
+    //   }).success(function(data){
         
-        $scope.config.new_view = false;
+    //     $scope.config.new_view = false;
 
-        $scope.posts.items.unshift(data.post);
-      }).error(function(err){
-        post.error = err;
-      });
-    }
-
-
-    $scope.update = function(post){
-      $http.post('/posts/update', {
-          id: post._id,
-          title: post.title,
-          content: post.content,
-          language: post.language
-      }).success(function(){
-        post.view_status = null;
-      }).error(function(err){
-        post._error = err;
-      });
-    }
+    //     $scope.posts.items.unshift(data.post);
+    //   }).error(function(err){
+    //     post.error = err;
+    //   });
+    // }
 
 
-    $scope.previewHTML = conversion.to_html;
+    // $scope.update = function(post){
+    //   $http.post('/posts/update', {
+    //       id: post._id,
+    //       title: post.title,
+    //       content: post.content,
+    //       language: post.language
+    //   }).success(function(){
+    //     post.view_status = null;
+    //   }).error(function(err){
+    //     post._error = err;
+    //   });
+    // }
 
-    $scope.reset = function(post){
-      post.view_status = null;
 
-      if (post,_origin) {
-        $.extend(post, post._origin);
-        delete post._origin;
-      }
-    }
+    $scope.to_html = conversion.to_html;
 
 
 

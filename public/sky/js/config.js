@@ -36,6 +36,7 @@
       'home': 'sky_ctrl/home.js',
       'posts': 'sky_ctrl/posts.js',
       'post_show': 'sky_ctrl/post_show.js',
+      'post_edit': 'sky_ctrl/post_edit.js',
       
 
       'alert': 'components/alert.js'

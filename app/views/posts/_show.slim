@@ -4,11 +4,7 @@ div class='datetime'
   strong class='date' = '{{ post.created_at | date:"MM-dd HH:mm" }}'
 
 div ng-switch-default='' class='show'
-  a href='#/blog/{{post._id}}'
+  a href='#/posts/{{post._id}}'
     h3 class="text-center" = '{{ post.title }}'
 
-  div class='post_content' ng-bind-html-unsafe="previewHTML(post, 'split')"
-
-  - if current_user.can? :edit, Post
-    p
-      button class='btn edit' ng-click='edit(post)' Edit
+  div class='post_content' ng-bind-html-unsafe="to_html(post, 'split')"

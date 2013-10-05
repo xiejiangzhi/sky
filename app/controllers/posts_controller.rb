@@ -30,6 +30,8 @@ class PostsController < Sky::App
 
 
 
+  # show
+  #
   # Params:
   #   id:
   # Return:
@@ -48,30 +50,37 @@ class PostsController < Sky::App
 
 
 
+  # create
+  #
   # Params:
   #   title:
   #   content:
   # Return:
   #   ok: true of false
   #   post: if true
-  post '/create' do
+  post '/create' do; begin
     post = Post.create!({
       :title => params[:title],
-      :content => params[:content]
+      :content => params[:content],
+      :user => current_user
     })
 
     render_ok :post => post
-  end
+  rescue => e
+    render_err e
+  end; end
 
 
 
+  # update
+  #
   # Params:
   #   id:
   #   title:
   #   content:
   # Return:
   #   ok: true or false
-  post '/update' do
+  post '/update' do; begin
     post = Post.find(params[:id])
 
     post.update_attributes({
@@ -81,5 +90,55 @@ class PostsController < Sky::App
     })
 
     render_ok
-  end
+  rescue => e
+    render_err e
+  end; end
+
+
+
+
+  # answer
+  #
+  # Params:
+  #   target_id:
+  #   content:
+  # Return:
+  #   ok: true or false
+  #   answer: {_id: xxx}
+  post '/answer' do; begin
+    post = Post.find(params[:target_id])
+
+    answer = post.posts.create({
+      :content => params[:content],
+      :language => params[:language],
+      :user => current_user
+    })
+
+    render_ok :answer => answer
+  rescue => e
+    render_err e
+  end; end
+
+
+
+
+  # answer_list
+  #
+  # Params:
+  #   target_id:
+  #   page:
+  #   perpage:
+  # Return:
+  #   ok: true or false
+  #   items: 
+  get '/answer_list' do; begin
+    post = Post.find(params[:target_id])
+    page = paging_args
+
+    answers = post.posts.skip(page[:skip]).limit(page[:limit])
+
+    render_page answers, post.posts.count
+  rescue => e
+    render_err e
+  end; end
 end

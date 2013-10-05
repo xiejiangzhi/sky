@@ -1,6 +1,5 @@
 
 define(function(require, exports){
-  // var 
   var alert = require('alert');
 
   exports.ctrl= function($scope, $http, $routeParams){

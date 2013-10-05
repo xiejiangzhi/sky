@@ -19,6 +19,10 @@ class User
   field :password_salt,   :type => String
 
 
+  has_many :posts
+  
+
+
   def valid_pwd(pwd)
     User.pwd_hash(pwd, password_salt || "") == password_hash
   end

@@ -20,4 +20,13 @@ module HelperMethods
   def error_should(res, e)
     JSON(res.body) == e.to_hash.merge(:ok => false)
   end
+
+
+
+  def send_test_req(params = {})
+    self.send(
+      spec_args[:req_method], spec_args[:path],
+      params, spec_args[:req_session]
+    )
+  end
 end
