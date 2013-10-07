@@ -5,19 +5,51 @@ div class='show post_box'
   div class='post_content' ng-bind-html-unsafe="to_html(post)"
 
 
+  a href='#/posts' Back
+
+  
+  // no display if preview
   div ng-hide='view_status'
     - if current_user.can?(:edit, Post)
       a href='#/posts/edit/{{ post._id }}' Edit
 
     hr
 
-    div class='answer'
-      form
-        textarea ng-model='answer.content' rows='3' cols='80'
-        br
-        a href='javascript: void(0)' class='btn btn-default' ng-click='create_answer()' Answer
 
-    ul class='answers' ng-repeat='answer in answers'
-      li
-        p ng-bind-html-unsafe="to_html(answer)"
-        span = '{{ answer.created_at | date:"yyyy-MM-dd HH:mm" }}'
+    div.answer
+      form
+        fieldset
+          legend Answer
+
+          label Content:
+          textarea ng-model='answer.content' rows='3' class='span8'
+
+          div ng-switch='current_user.role_name'
+            div ng-switch-when='Guest'
+              label Name:
+              input type='text' ng-model='answer.username'
+
+              label Email:
+              input type='text' ng-model='answer.email'
+            div ng-switch-else=''
+              span = '{{ current_user.username }} - '
+
+              span = '{{ current_user.email }}'
+
+
+        a href='javascript: void(0)' class='btn btn-default' ng-click='create_answer()' Submit
+
+    div.post_answers
+      div.content ng-repeat='answer in answers'
+        div.well
+          img src='http://www.gravatar.com/avatar/{{ md5(answer.email) }}?d=wavatar'
+          span = ' {{ answer.username }}({{ answer.email }})'
+          span = ' {{ answer.created_at | date:"yyyy-MM-dd HH:mm" }}'
+          p ng-bind-html-unsafe="to_html(answer)"
+
+      div.pager
+        ul
+          li class='{{ disable_class(is_prev()) }}'
+            a href="javascript: void(0)" ng-click='prev()' Prev
+          li class='{{ disable_class(is_next()) }}'
+            a href="javascript: void(0)" ng-click='next()' Next

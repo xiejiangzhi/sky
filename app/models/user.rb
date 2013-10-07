@@ -6,10 +6,17 @@ class User
   include Mongoid::Document
 
 
-  # role
+  # roles
   ADMIN   = 1
   COMMON  = 2
   GUEST   = 3
+
+  # roles name
+  ROLES_NAME = {
+    ADMIN => 'Admin',
+    COMMON => 'Common',
+    GUEST => 'Guest'
+  }
 
 
   field :username,        :type => String,  :default => ''
@@ -44,6 +51,19 @@ class User
     return false
   end
 
+
+
+
+  REMOVE_KEYS = %w{password_hash password_salt}
+  def to_json
+    data = self.attributes.to_hash
+
+    data[:role_name] = ROLES_NAME[data['role']]
+    data.delete_if {|k, v| REMOVE_KEYS.include? k }
+
+    data.to_json
+  end
+
 end
 
 
@@ -59,10 +79,13 @@ class User; class << self
 
 
 
+  def find_or_create(user_info)
+    where(user_info).first || create(user_info)
+  end
+
 
   def guest
-    where(:username => 'Guest', :role => GUEST).first ||
-    create(:username => 'Guest', :role => GUEST)
+    find_or_create(:username => 'Guest', :role => GUEST)
   end
 
 

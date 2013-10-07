@@ -12,8 +12,7 @@ define(function(require, exports){
 
     $scope.config = {
       new_view: false,
-      page: 1,
-      perpage: 15
+      page: 1
     };
     var tmp_year = {};
 
@@ -27,35 +26,6 @@ define(function(require, exports){
     };
 
 
-
-    // $scope.create = function(post){
-    //   $http.post('/posts/create', {
-    //       title: post.title,
-    //       content: post.content,
-    //       language: post.language
-    //   }).success(function(data){
-        
-    //     $scope.config.new_view = false;
-
-    //     $scope.posts.items.unshift(data.post);
-    //   }).error(function(err){
-    //     post.error = err;
-    //   });
-    // }
-
-
-    // $scope.update = function(post){
-    //   $http.post('/posts/update', {
-    //       id: post._id,
-    //       title: post.title,
-    //       content: post.content,
-    //       language: post.language
-    //   }).success(function(){
-    //     post.view_status = null;
-    //   }).error(function(err){
-    //     post._error = err;
-    //   });
-    // }
 
 
     $scope.to_html = conversion.to_html;

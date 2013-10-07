@@ -23,8 +23,6 @@ define(function(require, exports){
           var post_id = $scope.post._id;
         }
 
-        debugger
-
         $location.url('/posts/' + post_id);
       }).error(function(err){
         alert.error(err);

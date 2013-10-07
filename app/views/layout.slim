@@ -10,10 +10,10 @@ html ng-app='sky'
 
     javascript:
       seajs.use('sky');
+      window.current_user = #{ current_user.to_json.html_safe };
 
     == css_tag("bootstrap/css/bootstrap.css")
     == less_tag("sky.css")
   body class='sky'
     div ng-include='' src='"/template/components/alert"' ng-show='error' ng-controller='AlertCtrl'
-    div == slim :'_top_menu'
     div ng-view='' class='sky_view'

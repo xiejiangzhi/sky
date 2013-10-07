@@ -16,7 +16,7 @@ describe PostsController do
         :req_params => {},
         :req_session => {},
         :creator => Proc.new {|i|
-          Post.create(:title => "t#{i}", :content => "c#{i}")
+          Post.create(:title => "t#{i}", :content => "c#{i}", :user => get_user('test'))
         }
       }
     end
@@ -26,9 +26,9 @@ describe PostsController do
   
 
     it 'sort by created_at desc' do
-      Post.create(:title => '111', :content => '111')
+      Post.create(:title => '111', :content => '111', :user => get_user('test'))
       sleep 1
-      Post.create(:title => '222', :content => '222')
+      Post.create(:title => '222', :content => '222', :user => get_user('test'))
 
       send_test_req
       data = JSON(last_response.body)
@@ -40,7 +40,7 @@ describe PostsController do
 
   describe 'show' do
     before :each do
-      Post.create(:title => 'test t', :content => 'test c')
+      Post.create(:title => 'test t', :content => 'test c', :user => get_user('test'))
     end
 
     it 'default' do
@@ -103,7 +103,7 @@ describe PostsController do
 
   describe 'update' do
     before :each do
-      @post = Post.create(:title => 'test t', :content => 'test c')
+      @post = Post.create(:title => 'test t', :content => 'test c', :user => get_user('test'))
     end
 
     it 'no permission' do
@@ -138,14 +138,13 @@ describe PostsController do
 
   describe 'answer' do
     before :each do
-      @post = Post.create(:title => 'top', :content => 'tc')
+      @post = Post.create(:title => 'top', :content => 'tc', :user => get_user('test'))
       @user = get_user('test user')
     end
 
     it 'default' do
       req_args = {:content => 'answer', :target_id => @post.id}
       expect {
-
         post '/answer', req_args, valid_session(:user_id => @user.id.to_s)
         last_response.should be_ok
       }.to change(Post.unscoped, :count).by(1)
@@ -156,13 +155,58 @@ describe PostsController do
       data['answer']['user_id'].should == @user.id.to_s
       @post.reload.posts.count.should == 1
     end
+
+
+    it 'guest' do
+      req_args = {:content => 'answer', :target_id => @post.id}
+
+      expect {
+        post '/answer', req_args
+        last_response.should be_ok
+      }.to change(Post.unscoped, :count).by(1)
+
+      data = JSON(last_response.body)
+      data['answer']['_id'].should_not == nil
+      data['answer']['content'].should == 'answer'
+      data['answer']['user_id'].should == User.guest.id.to_s
+      @post.reload.posts.count.should == 1
+    end
+
+
+    it 'auto login' do
+      req_args = {
+        :content => 'answer',
+        :target_id => @post.id,
+        :username => 'asdf',
+        :email => 'asdf@asdf.com'
+      }
+      User.guest
+
+      expect {
+        expect {
+          post '/answer', req_args
+          last_response.should be_ok
+        }.to change(Post.unscoped, :count).by(1)
+      }.to change(User, :count).by(1)
+
+      user = User.where({
+        :username => req_args[:username],
+        :email => req_args[:email]
+      }).first
+
+      data = JSON(last_response.body)
+      data['answer']['_id'].should_not == nil
+      data['answer']['content'].should == 'answer'
+      data['answer']['user_id'].should == user.id.to_s
+      @post.reload.posts.count.should == 1
+    end
   end
 
 
 
   describe 'answer_list' do
     before :each do
-      @post = Post.create(:title => 'top', :content => 'tc')
+      @post = Post.create(:title => 'top', :content => 'tc', :user => get_user('test'))
     end
 
     let :spec_args do
@@ -172,7 +216,7 @@ describe PostsController do
         :req_params => {:target_id => @post.id.to_s},
         :req_session => {},
         :creator => Proc.new {|i|
-          @post.posts.create(:title => "t#{i}", :content => "c#{i}")
+          @post.posts.create(:title => "t#{i}", :content => "c#{i}", :user => get_user('test'))
         }
       }
     end
@@ -181,9 +225,9 @@ describe PostsController do
 
 
     it 'sort by created_at desc' do
-      @post.posts.create(:title => '111', :content => '111')
+      @post.posts.create(:title => '111', :content => '111', :user => get_user('test'))
       sleep 1
-      @post.posts.create(:title => '222', :content => '222')
+      @post.posts.create(:title => '222', :content => '222', :user => get_user('test'))
 
       send_test_req(:target_id => @post.id.to_s)
       last_response.should be_ok

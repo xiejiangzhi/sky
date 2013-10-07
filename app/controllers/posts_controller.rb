@@ -3,6 +3,7 @@ class PostsController < Sky::App
 
   helpers FilterHelper
   helpers ArgumentsValidHelper
+  helpers UserAutoLoginHelper
 
   before /create|update/ do
     auth_permissio_filter
@@ -112,6 +113,7 @@ class PostsController < Sky::App
     args_empty_valid %w{content}
 
     post = Post.find(params[:target_id])
+    user_auto_login
 
     answer = post.posts.create({
       :content => params[:content],

@@ -32,8 +32,7 @@ class UsersController < Sky::App
       :email => params[:email]
     }
 
-    user = User.where(user_info).first
-    user = User.create!(user_info) unless user
+    user = User.find_or_create(user_info)
 
     if user.role == User::ADMIN
       unless user.valid_pwd(params[:password])
