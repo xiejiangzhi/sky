@@ -20,4 +20,5 @@ tmp
 .yardoc
 _yardoc
 doc/
+logs/
 
