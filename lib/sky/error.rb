@@ -20,11 +20,21 @@ module Sky
     end
 
 
-    def to_hash
-      @eh ||= {
-        :error => error_type,
-        :error_desc => message
-      }
+    if SKY_ENV == 'production'
+      def to_hash
+        @eh ||= {
+          :error => error_type,
+          :error_desc => message
+        }
+      end
+    else
+      def to_hash
+        @eh ||= {
+          :backtrace => backtrace,
+          :error => error_type,
+          :error_desc => message
+        }
+      end
     end
   end
 

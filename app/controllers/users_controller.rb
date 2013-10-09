@@ -26,13 +26,13 @@ class UsersController < Sky::App
   # Return:
   #   role:
   #   
-  post '/login' do
+  post '/login' do; begin
     user_info = {
       :username => params[:username],
       :email => params[:email]
     }
 
-    user = User.find_or_create(user_info)
+    user = User.find_or_create_by(user_info)
 
     if user.role == User::ADMIN
       unless user.valid_pwd(params[:password])
@@ -43,7 +43,9 @@ class UsersController < Sky::App
     set_current_user user
 
     render_ok :username => user.username
-  end
+  rescue => e
+    render_err e
+  end; end
 
 
 

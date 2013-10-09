@@ -79,13 +79,8 @@ class User; class << self
 
 
 
-  def find_or_create(user_info)
-    where(user_info).first || create(user_info)
-  end
-
-
   def guest
-    find_or_create(:username => 'Guest', :role => GUEST)
+    find_or_create_by(:username => 'Guest', :role => GUEST)
   end
 
 
