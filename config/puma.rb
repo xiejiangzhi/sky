@@ -73,7 +73,7 @@ threads 0, 16
 #
 # The default is “tcp://0.0.0.0:9292”.
 #
-bind 'tcp://0.0.0.0:9292'
+# bind 'tcp://0.0.0.0:9292'
 bind 'unix://tmp/puma.sock'
 # bind 'unix:///var/run/puma.sock'
 # bind 'unix:///var/run/puma.sock?umask=0777'
