@@ -38,7 +38,7 @@ environment 'production'
 # The default is “false”.
 #
 # daemonize
-daemonize false
+daemonize true
 
 # Store the pid of the server in the file at “path”.
 #
@@ -66,7 +66,7 @@ stdout_redirect 'logs/stdout', 'logs/stderr', true
 #
 # The default is “0, 16”.
 #
-threads 0, 8
+threads 0, 16
 
 # Bind the server to “url”. “tcp://”, “unix://” and “ssl://” are the only
 # accepted protocols.
