@@ -1,5 +1,7 @@
 
 task :console do
+  require 'pry'
+  
   require File.expand_path('../app/sky', __FILE__)
 
   binding.pry
@@ -14,6 +16,7 @@ task :setup do
   User.find_or_create_by({
     :username => config['admin']['username'],
     :email => config['admin']['email'],
-    :password => config['admin']['password']
+    :password => config['admin']['password'],
+    :role => User::ADMIN
   })
 end
