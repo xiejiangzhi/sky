@@ -9,6 +9,7 @@ define(function(require){
 
   var sa = require('sea_angular');
   var alert = require('alert');
+  var user = require('user');
 
 
   var Sky = angular.module('sky', []);
@@ -36,4 +37,5 @@ define(function(require){
   });
 
   Sky.controller('AlertCtrl', alert.ctrl);
+  Sky.controller('UserCtrl', user.ctrl);
 });

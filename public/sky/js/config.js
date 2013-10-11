@@ -40,7 +40,8 @@
       'post_edit': 'sky_ctrl/post_edit.js',
       
 
-      'alert': 'components/alert.js'
+      'alert': 'components/alert.js',
+      'user': 'components/user.js'
     },
   });
 }());

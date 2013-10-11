@@ -26,7 +26,6 @@ define(function(require, exports){
     $scope.answer = {
       language: 'markdown'
     };
-    $scope.current_user = window.current_user;
 
 
 
@@ -36,7 +35,6 @@ define(function(require, exports){
       $http.post('/posts/answer', params)
       .success(function(data){
         add_answer(data['answer']);
-        update_user(data['answer']);
       }).error(function(data){
         alert.error(data);
       });
@@ -69,6 +67,11 @@ define(function(require, exports){
       return ($scope.pager.current_page < $scope.pager.count_pages);
     }
 
+
+
+    $scope.is_user_post = function(){
+      return $scope.post.user_id == window.current_user._id;
+    }
 
 
 
@@ -107,26 +110,6 @@ define(function(require, exports){
       $scope.answer = {language: 'markdown'};
     }
 
-
-
-    function update_user(answer){
-      var cu = window.current_user;
-
-      if (is_login(answer.username)) {
-        cu.role_name = 'Common';
-        cu.username = answer.username;
-        cu.email = answer.email;
-      }
-    }
-
-
-
-    function is_login(username) {
-      return (
-        window.current_user.role_name == 'Guest' &&
-        username != window.current_user.username
-      );
-    }
   }
   
 });

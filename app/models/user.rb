@@ -46,9 +46,7 @@ class User
 
 
   def can?(operat, resource)
-    return true if role == ADMIN
-
-    return false
+    Sky::Permissions.new(self).can?(operat, resource)
   end
 
 

@@ -1,18 +1,18 @@
 
 div class='show post_box'
   h3 class="text-center" = '{{ post.title }}'
+  div
+    span = 'Anthor: {{ post.username }}'
 
-  div class='post_content' ng-bind-html-unsafe="to_html(post)"
+  div class='well post_content' ng-bind-html-unsafe="to_html(post)"
 
 
   a href='#/posts' Back
 
   
   // no display if preview
-  div ng-hide='view_status'
-    - if current_user.can?(:edit, Post)
-      a href='#/posts/edit/{{ post._id }}' Edit
-
+  div ng-hide='view_status || !is_user_post()'
+    a href='#/posts/edit/{{ post._id }}' Edit
     hr
 
 
@@ -23,19 +23,6 @@ div class='show post_box'
 
           label Content:
           textarea ng-model='answer.content' rows='3' class='span8'
-
-          div ng-switch='current_user.role_name'
-            div ng-switch-when='Guest'
-              label Name:
-              input type='text' ng-model='answer.username'
-
-              label Email:
-              input type='text' ng-model='answer.email'
-            div ng-switch-else=''
-              span = '{{ current_user.username }} - '
-
-              span = '{{ current_user.email }}'
-
 
         a href='javascript: void(0)' class='btn btn-default' ng-click='create_answer()' Submit
 

@@ -7,4 +7,6 @@ div ng-switch-default='' class='show'
   a href='#/posts/{{post._id}}'
     h3 class="text-center" = '{{ post.title }}'
 
-  div class='post_content' ng-bind-html-unsafe="to_html(post, 'split')"
+  div
+    span = 'Author: {{post.username}}'
+  div class='well post_content' ng-bind-html-unsafe="to_html(post, 'split')"

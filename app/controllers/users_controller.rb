@@ -42,7 +42,7 @@ class UsersController < Sky::App
 
     set_current_user user
 
-    render_ok :username => user.username
+    render_ok JSON(user.to_json)
   rescue => e
     render_err e
   end; end

@@ -5,11 +5,6 @@ class PostsController < Sky::App
   helpers ArgumentsValidHelper
   helpers UserAutoLoginHelper
 
-  before /create|update/ do
-    auth_permissio_filter
-  end
-  
-
 
   # all posts
   # 
@@ -87,6 +82,8 @@ class PostsController < Sky::App
   post '/update' do; begin
     post = Post.find(params[:id])
 
+    raise Sky::NoPermissionError.new unless current_user.can?(:update, post)
+
     post.update_attributes({
       :title => params[:title],
       :content => params[:content],
@@ -147,5 +144,12 @@ class PostsController < Sky::App
     render_page answers, post.posts.count
   rescue => e
     render_err e
+  end; end
+
+
+
+
+  post '/hidden' do; begin
+    raise Sky::NoPermissionError.new current_user.can?(:update, post)
   end; end
 end
