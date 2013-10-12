@@ -29,10 +29,11 @@ div class='show post_box'
     div.post_answers
       div.content ng-repeat='answer in answers'
         div.well
-          img src='http://www.gravatar.com/avatar/{{ md5(answer.email) }}?d=wavatar'
-          span = ' {{ answer.username }}({{ answer.email }})'
+          img src='http://www.gravatar.com/avatar/{{ md5(answer.email) }}?d=wavatar&s=60'
+          span = ' {{ answer.username }}'
           span = ' {{ answer.created_at | date:"yyyy-MM-dd HH:mm" }}'
-          p ng-bind-html-unsafe="to_html(answer)"
+          div
+            p ng-bind-html-unsafe="to_html(answer)"
 
       div.pager
         ul
