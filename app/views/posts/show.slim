@@ -11,8 +11,8 @@ div class='show post_box'
 
   
   // no display if preview
-  div ng-hide='view_status || !is_user_post()'
-    a href='#/posts/edit/{{ post._id }}' Edit
+  div ng-hide='view_status'
+    a href='#/posts/edit/{{ post._id }}' ng-hide='!is_user_post()' Edit
     hr
 
 
